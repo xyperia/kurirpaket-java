@@ -1,4 +1,4 @@
-📦 kurirpaket-java
+# 📦 kurirpaket-java
 
 A helpful tool to simulate a log traffic to your syslog server using your provided dummy log
 
@@ -7,7 +7,7 @@ It reads from local log files, sends them line-by-line over UDP or TCP, and loop
 
 Easily configurable via a simple kurirpaket.conf file — no rebuild required when changing configuration or logs.
 
-✨ Features
+## ✨ Features
 
 Send logs from multiple sources to different Syslog servers.
 
@@ -21,6 +21,7 @@ External configuration and logs (not bundled in the JAR).
 
 Simple to deploy, runs as a standalone .jar.
 
+```
 📂 Project Structure
 kurirpaket/
 ├── pom.xml                   # Maven build file
@@ -31,26 +32,29 @@ kurirpaket/
 └── src/
     └── main/java/com/kurirpaket/
         └── Main.java         # Application source code
+```
 
-⚙️ Configuration (kurirpaket.conf)
+## ⚙️ Configuration (kurirpaket.conf)
 
-Define one or more log sources. Each block supports the following fields:
+- Define one or more log sources. Each block supports the following fields:
 
-logid: Unique identifier for the log source.
+- logid: Unique identifier for the log source.
 
-enabled: true or false — control whether the source runs.
+- enabled: true or false — control whether the source runs.
 
-log_dir: Path to the log file to replay.
+- log_dir: Path to the log file to replay.
 
-syslog_host: Destination Syslog server IP/hostname.
+- syslog_host: Destination Syslog server IP/hostname.
 
-syslog_port: Destination port.
+- syslog_port: Destination port.
 
-syslog_protocol: udp or tcp.
+- syslog_protocol: udp or tcp.
 
-interval: Time between sending log lines (e.g., 1s, 500ms, 1m).
+- interval: Time between sending log lines (e.g., 1s, 500ms, 1m).
 
-Example
+### Example
+
+```
 - logid: fortinet
   enabled: true
   log_dir: source-logs/fortinet.log
@@ -66,40 +70,43 @@ Example
   syslog_port: 12051
   syslog_protocol: tcp
   interval: 1s
+```
 
-🏗️ Build Instructions
-Prerequisites
+## 🏗️ Build Instructions
+### Prerequisites
 
-Java 24
+- Java 24
 
-Maven 3.6+
+- Maven 3.6+
 
 Build the JAR
-mvn clean package
+
+`mvn clean package`
 
 
 The output JAR will be created in:
 
-target/kurirpaket-1.0.0.jar
+`target/kurirpaket-1.0.0.jar`
 
-▶️ Running the App
+## ▶️ Running the App
 
 Run the app with the configuration file as argument:
 
-java -jar target/kurirpaket-1.0.0.jar kurirpaket.conf
+`java -jar target/kurirpaket-1.0.0.jar kurirpaket.conf`
 
 
 If no argument is provided, it defaults to kurirpaket.conf in the current directory.
 
 Logs (fortinet.log, kaspersky.log, etc.) are read from the locations defined in kurirpaket.conf.
 
-📜 Example Log File
+## 📜 Example Log File
 
 Example fortinet.log (each line is sent separately):
 
+```
 Feb 20 04:38:02 192.168.202.101 id=firewall sn=E0E69K5C4LL .......
 Feb 20 04:38:02 192.168.202.101 id=firewall sn=C0EAE45CA55 .......
-
+```
 
 The app will:
 
@@ -107,15 +114,10 @@ Send the first line → wait interval (e.g., 1s) → send next line.
 
 When reaching the end, restart from the beginning.
 
-📝 Notes
+## 📝 Notes
 
 You can freely edit kurirpaket.conf and source-logs/*.log without rebuilding the app.
 
 To disable a log source, set enabled: false.
 
 For new sources, simply append a new block to kurirpaket.conf.
-
-📄 License
-
-MIT License. See LICENSE
- for details.
