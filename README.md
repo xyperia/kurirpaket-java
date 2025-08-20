@@ -24,8 +24,10 @@ Simple to deploy, runs as a standalone .jar.
 ```
 📂 Project Structure
 kurirpaket/
-├── pom.xml                   # Maven build file
+├── jdk/                      # Bundled JDK 24
 ├── kurirpaket.conf           # App configuration (external, editable)
+├── kurirpaket.bat            # Bat file. sh for Linux
+├── 1.0.0-SNAPSHOT.jar        # Java archive file
 ├── source-logs/              # Example log files (external, editable)
 │   ├── fortinet.log
 │   └── kaspersky.log
@@ -77,22 +79,11 @@ kurirpaket/
 
 - Java 24
 
-- Maven 3.6+
-
-Build the JAR
-
-`mvn clean package`
-
-
-The output JAR will be created in:
-
-`target/kurirpaket-1.0.0.jar`
-
 ## ▶️ Running the App
 
 Run the app with the configuration file as argument:
 
-`java -jar target/kurirpaket-1.0.0.jar kurirpaket.conf`
+`java -jar kurirpaket-1.0.0.jar kurirpaket.conf`
 
 
 If no argument is provided, it defaults to kurirpaket.conf in the current directory.

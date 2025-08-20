@@ -1,12 +1,10 @@
-package com.kurirpaket;
-
 import java.io.*;
 import java.net.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-public class main {
+public class Main {
 
     static class LogConfig {
         String logId;
